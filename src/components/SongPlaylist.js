@@ -1,6 +1,7 @@
 import { createRandomSong } from "../data";
 import { useDispatch, useSelector } from "react-redux";
 import { addSong, removeSong } from "../store";
+import { Button } from "@mui/material";
 
 function SongPlaylist() {
   // To Do:
@@ -29,12 +30,12 @@ function SongPlaylist() {
     return (
       <li key={song}>
         {song}
-        <button
+        <Button
           onClick={() => handleSongRemove(song)}
-          className="button is-danger"
+          variant="outlined"
         >
           X
-        </button>
+        </Button>
       </li>
     );
   });
@@ -44,12 +45,12 @@ function SongPlaylist() {
       <div className="table-header">
         <h3 className="subtitle is-3">Song Playlist</h3>
         <div className="buttons">
-          <button
+          <Button
             onClick={() => handleSongAdd(createRandomSong())}
-            className="button is-link"
+            variant="outlined"
           >
             + Add Song to Playlist
-          </button>
+          </Button>
         </div>
       </div>
       <ul>{renderedSongs}</ul>

@@ -1,31 +1,35 @@
+import { useDispatch, useSelector } from "react-redux";
 import { createRandomMovie } from "../data";
-
+import { addMovie, removeMovie } from "../store";
+import { Button } from "@mui/material";
 
 
 function MoviePlaylist() {
-    const moviePlaylist = [];
-
+    // const moviePlaylist = [];
+    const moviePlaylist = useSelector((state)=> state.movies) 
+    const dispatch = useDispatch()
     const handleMovieAdd = (movie) => {
         // To Do:
         // Add movie to list of movies
-
+        dispatch(addMovie(movie))
         console.log(movie);
+
       };
       const handleMovieRemove = (movie) => {
         // To Do:
         // Remove movie from list of movies
+        dispatch(removeMovie(movie))
       };
     
       const renderedMovies = moviePlaylist.map((movie) => {
         return (
           <li key={movie}>
             {movie}
-            <button
+            <Button variant="outlined"
               onClick={() => handleMovieRemove(movie)}
-              className="button is-danger"
             >
               X
-            </button>
+            </Button>
           </li>
         );
       });
@@ -36,12 +40,12 @@ function MoviePlaylist() {
       <div className="table-header">
         <h3 className="subtitle is-3">Movie Playlist</h3>
         <div className="buttons">
-          <button
+          <Button
             onClick={() => handleMovieAdd(createRandomMovie())}
-            className="button is-link"
+            variant="outlined"
           >
             + Add Movie to Playlist
-          </button>
+          </Button>
         </div>
       </div>
       <ul>{renderedMovies}</ul>
